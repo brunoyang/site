@@ -43,14 +43,6 @@ export default function Home() {
           >
             查看文档
           </a>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors dark:bg-gray-700 dark:hover:bg-gray-600"
-          >
-            查看源码
-          </a>
         </div>
       </main>
 
