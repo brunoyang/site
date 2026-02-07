@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(pnpm add:*)",
+      "WebFetch(domain:opennext.js.org)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
