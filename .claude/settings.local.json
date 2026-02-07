@@ -7,7 +7,9 @@
       "Bash(pnpm add:*)",
       "WebFetch(domain:opennext.js.org)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(pnpm deploy:*)",
+      "Bash(pnpm run deploy:*)"
     ]
   }
 }
