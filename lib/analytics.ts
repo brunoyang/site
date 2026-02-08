@@ -29,14 +29,14 @@ export async function trackEvent(options: {
   try {
     await Promise.resolve(
       dataset.writeDataPoint({
-      indexes: [
-        options.event,
-        options.locale ?? '',
-        options.postId ?? '',
-        options.path ?? '',
-      ],
-      doubles: [1],
-      blobs: [options.userAgent ? truncate(options.userAgent, 512) : ''],
+        indexes: [options.event],
+        doubles: [1],
+        blobs: [
+          options.locale ?? '',
+          options.postId ?? '',
+          options.path ?? '',
+          options.userAgent ? truncate(options.userAgent, 512) : '',
+        ],
       })
     );
   } catch {

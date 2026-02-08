@@ -7,6 +7,5 @@ export async function verifyTurnstile(token: string, secretKey: string): Promise
     body: new URLSearchParams({ secret: secretKey, response: token }),
   });
   const data = await res.json<{ success: boolean }>();
-  console.log('Turnstile verification response:', data, 'secretKey: ', secretKey, 'token: ', token);
   return data.success;
 }
