@@ -13,7 +13,7 @@ export default function middleware(request: NextRequest) {
   if (!hasLocale) {
     const url = request.nextUrl.clone();
     url.pathname = `/${defaultLocale}${pathname}`;
-    return NextResponse.redirect(url);
+    return NextResponse.rewrite(url);
   }
 }
 
