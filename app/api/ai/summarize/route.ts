@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getPostById } from '@/lib/posts';
 import { generateSummary } from '@/lib/ai';
+import { trackAiSummaryGenerate } from '@/lib/analytics';
 
 export async function POST(req: NextRequest) {
   const { postId, locale } = await req.json() as { postId: string; locale: string };
@@ -19,6 +20,13 @@ export async function POST(req: NextRequest) {
   if (!summary) {
     return NextResponse.json({ error: 'AI not available' }, { status: 503 });
   }
+
+  await trackAiSummaryGenerate({
+    postId,
+    locale,
+    path: req.nextUrl.pathname,
+    userAgent: req.headers.get('user-agent'),
+  });
 
   return NextResponse.json({ summary });
 }

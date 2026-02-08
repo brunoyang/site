@@ -3,6 +3,7 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { drizzle } from 'drizzle-orm/d1';
 import { contactMessages } from '@/db/schema';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { trackContactSubmit } from '@/lib/analytics';
 
 export async function POST(request: NextRequest) {
   const { name, email, message, turnstileToken } = await request.json<{
@@ -32,6 +33,11 @@ export async function POST(request: NextRequest) {
     // Save message to D1
     const db = drizzle(env.DB);
     await db.insert(contactMessages).values({ id, name, email, message, createdAt });
+
+    await trackContactSubmit({
+      path: request.nextUrl.pathname,
+      userAgent: request.headers.get('user-agent'),
+    });
 
     // Enqueue async notification
     const cfEnv = env as CloudflareEnv;

@@ -72,6 +72,15 @@ npx wrangler deploy    →  上传到 Cloudflare Workers
 - 密钥：环境变量 `SESSION_SECRET`（Cloudflare Workers Secret）
 - **注意**：密码哈希用 SHA-256（Workers 不支持 bcrypt/argon2），生产环境需额外防护（限制登录尝试次数）
 
+## Cloudflare Queues
+
+- 联系表单提交后异步通知，producer binding：`CONTACT_QUEUE`（`Queue` 类型）
+- queue 名称：`contact-notifications`，创建时须加 `--message-retention-period-secs 86400`
+- **OpenNext 编译的 worker.js 只导出 `fetch`，不能内嵌 `queue()` 消费者**
+- 消费者是独立 Worker：[workers/queue-consumer.ts](workers/queue-consumer.ts)，配置：[wrangler.consumer.toml](wrangler.consumer.toml)
+- 部署消费者：`npx wrangler deploy --config wrangler.consumer.toml`
+- 主 Worker 和消费者 Worker 通过**队列名**解耦，互不感知
+
 ## Node.js API 兼容性
 
 已启用 `nodejs_compat` 标志，支持 `Buffer`、`crypto`、`path` 等常用模块。

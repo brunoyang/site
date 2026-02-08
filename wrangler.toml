@@ -40,3 +40,8 @@ binding = "AI"
 [[queues.producers]]
 queue = "contact-notifications"
 binding = "CONTACT_QUEUE"
+
+# Analytics Engine（自定义事件分析）
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "site_events"

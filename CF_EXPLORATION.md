@@ -50,7 +50,7 @@
   - 需要 Paid plan 或 Workers Paid（$5/月），酌情考虑
 
 ### Phase 7：自定义分析（可选）
-- [ ] **Analytics Engine**
+- [x] **Analytics Engine**
   - 目标：记录自定义事件（文章阅读、按钮点击）
   - 完全免费
 
@@ -69,7 +69,7 @@
 | Turnstile | ✅ 已集成 | 2026-02-08 | 联系表单人机验证 + D1 存消息 |
 | Queues | ✅ 已集成 | 2026-02-08 | 联系表单异步通知，独立消费者 Worker |
 | Durable Objects | ⏸️ 暂缓 | — | 需付费 |
-| Analytics Engine | 🔲 待开始 | — | |
+| Analytics Engine | ✅ 已集成 | 2026-02-08 | 自定义事件打点 |
 
 ---
 
@@ -125,4 +125,15 @@
 - 创建 queue 命令须加 `--message-retention-period-secs 86400`（默认 4 天超出免费限制）
 - 发送消息：`env.CONTACT_QUEUE.send({ id, name, email, createdAt })`
 - 联系表单 API：先保存 D1，再 enqueue（queue 失败不影响主流程）
+
+### Analytics Engine
+
+- binding 名：`ANALYTICS`，dataset：`site_events`
+- 配置文件：`wrangler.toml` 的 `[[analytics_engine_datasets]]`
+- 事件写入：`env.ANALYTICS.writeDataPoint(...)`
+- 当前已打点事件：
+  - `post_read`：文章详情页渲染时记录（`/[locale]/posts/[id]`）
+  - `ai_summary_generate`：调用 `POST /api/ai/summarize` 成功返回摘要后记录
+  - `contact_submit`：联系表单 `POST /api/contact` 通过 Turnstile 并写入 D1 后记录
+- 开发模式说明：本地 `pnpm dev` 下可能没有 CF context，打点会自动静默降级
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostById } from "@/lib/posts";
 import { incrementViewCount } from "@/lib/views";
+import { trackPostRead } from "@/lib/analytics";
 import AiSummary from "./AiSummary";
 
 export default async function PostPage({
@@ -15,6 +16,7 @@ export default async function PostPage({
   const [post, views] = await Promise.all([
     getPostById(id),
     incrementViewCount(id),
+    trackPostRead({ postId: id, locale, path: `/${locale}/posts/${id}` }),
   ]);
 
   if (!post) notFound();

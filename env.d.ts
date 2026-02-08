@@ -7,4 +7,5 @@ interface CloudflareEnv {
   AI: Ai;
   TURNSTILE_SECRET_KEY: string;
   CONTACT_QUEUE: Queue;
+  ANALYTICS: AnalyticsEngineDataset;
 }
