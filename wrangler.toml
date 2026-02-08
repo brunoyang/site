@@ -27,7 +27,11 @@ binding = "DB"
 database_name = "brunoyang-site-db"
 database_id = "b9f6c4dc-77a4-4ee1-bbb3-5bf9b4d8810d"
 
-# KV 键值存储（文章阅读量）
+# KV 键值存储（文章阅读量 + AI 摘要缓存）
 [[kv_namespaces]]
 binding = "KV"
 id = "e1044732b23d48e69cf4fc5b3c381b76"
+
+# Workers AI
+[ai]
+binding = "AI"

@@ -28,7 +28,7 @@
   - 免费额度：10万 reads/天 / 1000 writes/天
 
 ### Phase 3：AI 推理
-- [ ] **Workers AI — 边缘 LLM 推理**
+- [x] **Workers AI — 边缘 LLM 推理**
   - 目标：为文章生成 AI 摘要，或实现中英翻译辅助
   - 模型候选：`@cf/meta/llama-3.1-8b-instruct`（文本生成）
   - binding 名称：`AI`
@@ -65,7 +65,7 @@
 | Assets | ✅ 已集成 | — | 静态文件 |
 | D1 | ✅ 已集成 | 2026-02-08 | Edge SQLite，文章 CRUD |
 | KV | ✅ 已集成 | 2026-02-08 | 文章阅读量计数器 |
-| Workers AI | 🔲 待开始 | — | |
+| Workers AI | ✅ 已集成 | 2026-02-08 | 文章 AI 摘要（按需生成 + KV 缓存） |
 | Turnstile | 🔲 待开始 | — | |
 | Queues | 🔲 待开始 | — | |
 | Durable Objects | ⏸️ 暂缓 | — | 需付费 |
@@ -99,6 +99,12 @@
 
 ### Workers AI
 
+- binding 名：`AI`，模型：`@cf/meta/llama-3.1-8b-instruct`
+- 通过 `getCloudflareContext({ async: true })` 访问 `env.AI`，失败时优雅降级
+- 功能：文章详情页按需生成 AI 摘要（中英分别生成）
+- 缓存：摘要存储在 KV，key 格式 `post:summary:{postId}:{locale}`，TTL 7 天
+- API：`POST /api/ai/summarize`，body `{ postId, locale }`
+- UI：Client Component `AiSummary.tsx`，点击按钮触发生成，显示结果
 
 ### Turnstile
 

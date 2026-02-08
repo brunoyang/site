@@ -4,4 +4,5 @@ interface CloudflareEnv {
   ASSETS: Fetcher;
   SESSION_SECRET: string;
   KV: KVNamespace;
+  AI: Ai;
 }

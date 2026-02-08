@@ -28,7 +28,10 @@
     "description": "Latest articles about Cloudflare and Next.js",
     "readMore": "Read more",
     "backToList": "← Back to posts",
-    "views": "{count, plural, one {# view} other {# views}}"
+    "views": "{count, plural, one {# view} other {# views}}",
+    "aiSummary": "Generate AI Summary",
+    "aiSummaryLoading": "Generating…",
+    "aiSummaryTitle": "AI Summary"
   },
   "AdminPage": {
     "title": "Admin — Manage Posts",

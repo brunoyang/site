@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostById } from "@/lib/posts";
 import { incrementViewCount } from "@/lib/views";
+import AiSummary from "./AiSummary";
 
 export default async function PostPage({
   params,
@@ -41,6 +42,13 @@ export default async function PostPage({
           <div className="text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed">
             {locale === "zh" ? post.contentZh : post.content}
           </div>
+          <AiSummary
+            postId={post.id}
+            locale={locale}
+            label={t("aiSummary")}
+            loadingLabel={t("aiSummaryLoading")}
+            titleLabel={t("aiSummaryTitle")}
+          />
         </article>
       </div>
     </div>
