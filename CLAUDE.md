@@ -81,6 +81,16 @@ npx wrangler deploy    →  上传到 Cloudflare Workers
 - 部署消费者：`npx wrangler deploy --config wrangler.consumer.toml`
 - 主 Worker 和消费者 Worker 通过**队列名**解耦，互不感知
 
+## Analytics Engine（自定义事件分析）
+
+- binding：`ANALYTICS`，dataset：`site_events`（配置在 [wrangler.toml](wrangler.toml) 的 `[[analytics_engine_datasets]]`）
+- 写入封装：[lib/analytics.ts](lib/analytics.ts)（通过 `getCloudflareContext({ async: true })` 获取 `env.ANALYTICS`；失败时静默降级）
+- 已打点事件（写入 `indexes=[event, locale, postId, path]`，`blobs=[userAgent]`）：
+	- `post_read`：文章详情页渲染时记录（[app/[locale]/posts/[id]/page.tsx](app/[locale]/posts/[id]/page.tsx)）
+	- `ai_summary_generate`：AI 摘要 API 成功返回后记录（[app/api/ai/summarize/route.ts](app/api/ai/summarize/route.ts)）
+	- `contact_submit`：联系表单通过 Turnstile 且写入 D1 后记录（[app/api/contact/route.ts](app/api/contact/route.ts)）
+- 注意：本地 `pnpm run dev`（Node.js 模式）通常没有 Cloudflare runtime context，Analytics 会自动不写入；用 `pnpm run preview` 验证写入更接近线上。
+
 ## Node.js API 兼容性
 
 已启用 `nodejs_compat` 标志，支持 `Buffer`、`crypto`、`path` 等常用模块。
