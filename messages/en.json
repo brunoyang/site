@@ -27,7 +27,8 @@
     "title": "Blog Posts",
     "description": "Latest articles about Cloudflare and Next.js",
     "readMore": "Read more",
-    "backToList": "← Back to posts"
+    "backToList": "← Back to posts",
+    "views": "{count, plural, one {# view} other {# views}}"
   },
   "AdminPage": {
     "title": "Admin — Manage Posts",

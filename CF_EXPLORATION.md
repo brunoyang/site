@@ -22,7 +22,7 @@
   - 免费额度：5GB 存储 / 500万 reads/天 / 10万 writes/天
 
 ### Phase 2：缓存 & 状态
-- [ ] **KV — 全球分布式键值存储**
+- [x] **KV — 全球分布式键值存储**
   - 目标：实现页面访问计数器（每篇文章的阅读量）
   - binding 名称：`KV`
   - 免费额度：10万 reads/天 / 1000 writes/天
@@ -64,7 +64,7 @@
 | R2 | ✅ 已集成 | — | ISR 缓存 |
 | Assets | ✅ 已集成 | — | 静态文件 |
 | D1 | ✅ 已集成 | 2026-02-08 | Edge SQLite，文章 CRUD |
-| KV | 🔲 待开始 | — | |
+| KV | ✅ 已集成 | 2026-02-08 | 文章阅读量计数器 |
 | Workers AI | 🔲 待开始 | — | |
 | Turnstile | 🔲 待开始 | — | |
 | Queues | 🔲 待开始 | — | |
@@ -89,6 +89,13 @@
 
 ### KV
 
+- binding 名：`KV`，namespace_id：`e1044732b23d48e69cf4fc5b3c381b76`
+- 通过 `getCloudflareContext({ async: true })` 访问 `env.KV`，失败时优雅降级返回 0
+- KV key 格式：`post:views:{postId}`
+- 文章详情页（`/[locale]/posts/[id]`）：每次访问 `incrementViewCount()` + 显示计数
+- 文章列表页：`getViewCounts()` 批量读取所有文章计数并展示
+- i18n：英文用 ICU 复数 `{count, plural, one {# view} other {# views}}`，中文直接 `{count} 次阅读`
+- 本地 `pnpm dev` 模式下 KV 不可用（无 CF context），自动降级不显示计数
 
 ### Workers AI
 

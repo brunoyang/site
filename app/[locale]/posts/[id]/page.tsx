@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostById } from "@/lib/posts";
+import { incrementViewCount } from "@/lib/views";
 
 export default async function PostPage({
   params,
@@ -10,7 +11,10 @@ export default async function PostPage({
 }) {
   const { locale, id } = await params;
   const t = await getTranslations("PostsPage");
-  const post = await getPostById(id);
+  const [post, views] = await Promise.all([
+    getPostById(id),
+    incrementViewCount(id),
+  ]);
 
   if (!post) notFound();
 
@@ -28,8 +32,11 @@ export default async function PostPage({
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
             {locale === "zh" ? post.titleZh : post.title}
           </h1>
-          <div className="text-sm text-gray-400 mb-6">
-            {post.author} · {post.date}
+          <div className="text-sm text-gray-400 mb-6 flex items-center gap-3">
+            <span>{post.author} · {post.date}</span>
+            {views > 0 && (
+              <span>· {t("views", { count: views })}</span>
+            )}
           </div>
           <div className="text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed">
             {locale === "zh" ? post.contentZh : post.content}

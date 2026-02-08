@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/posts";
+import { getViewCounts } from "@/lib/views";
 
 export default async function PostsPage({
   params,
@@ -10,6 +11,7 @@ export default async function PostsPage({
   const { locale } = await params;
   const t = await getTranslations("PostsPage");
   const posts = await getAllPosts();
+  const viewCounts = await getViewCounts(posts.map((p) => p.id));
 
   return (
     <div className="min-h-screen p-8 bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
@@ -36,6 +38,9 @@ export default async function PostsPage({
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-400">
                   {post.author} · {post.date}
+                  {viewCounts[post.id] > 0 && (
+                    <span> · {t("views", { count: viewCounts[post.id] })}</span>
+                  )}
                 </span>
                 <Link
                   href={`/${locale}/posts/${post.id}`}

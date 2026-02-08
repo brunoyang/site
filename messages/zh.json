@@ -27,7 +27,8 @@
     "title": "博客文章",
     "description": "关于 Cloudflare 和 Next.js 的最新文章",
     "readMore": "阅读更多",
-    "backToList": "← 返回文章列表"
+    "backToList": "← 返回文章列表",
+    "views": "{count} 次阅读"
   },
   "AdminPage": {
     "title": "管理 — 文章管理",
