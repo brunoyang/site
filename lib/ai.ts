@@ -30,10 +30,10 @@ export async function generateSummary(
       : `Summarize the following article in 2-3 sentences:\n\n${content}`;
 
   const result = await ctx.ai.run('@cf/meta/llama-3-8b-instruct', {
-    messages: [{ role: 'user', content: prompt }],
-  });
+    messages: [{ role: 'user' as const, content: prompt }],
+  }) as { response?: string };
 
-  const summary = (result as { response?: string }).response?.trim() ?? null;
+  const summary = result.response?.trim() ?? null;
   if (summary) {
     await ctx.kv.put(summaryKey(postId, locale), summary, { expirationTtl: 86400 * 7 });
   }

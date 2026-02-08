@@ -25,7 +25,7 @@ export default function AiSummary({ postId, locale, label, loadingLabel, titleLa
         body: JSON.stringify({ postId, locale }),
       });
       if (!res.ok) throw new Error('Failed');
-      const { summary } = await res.json();
+      const { summary } = await res.json<{summary: string}>();
       setSummary(summary);
     } catch {
       setError('✗');
