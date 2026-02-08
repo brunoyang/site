@@ -40,7 +40,7 @@
   - 完全免费，无额度限制
 
 ### Phase 5：异步处理
-- [ ] **Queues — 消息队列**
+- [x] **Queues — 消息队列**
   - 目标：表单提交后异步处理（如记录新评论事件）
   - 免费额度：100万 operations/月
 
@@ -67,7 +67,7 @@
 | KV | ✅ 已集成 | 2026-02-08 | 文章阅读量计数器 |
 | Workers AI | ✅ 已集成 | 2026-02-08 | 文章 AI 摘要（按需生成 + KV 缓存） |
 | Turnstile | ✅ 已集成 | 2026-02-08 | 联系表单人机验证 + D1 存消息 |
-| Queues | 🔲 待开始 | — | |
+| Queues | ✅ 已集成 | 2026-02-08 | 联系表单异步通知，独立消费者 Worker |
 | Durable Objects | ⏸️ 暂缓 | — | 需付费 |
 | Analytics Engine | 🔲 待开始 | — | |
 
@@ -117,4 +117,12 @@
 
 ### Queues
 
+- queue 名称：`contact-notifications`，保留时间 24h（免费账户限制 max 86400s）
+- producer binding：`CONTACT_QUEUE`（`Queue` 类型），在 `wrangler.toml` 的 `[[queues.producers]]` 块配置
+- OpenNext 编译的 worker.js 只导出 `fetch` 处理器，**不支持** `queue()` 导出，消费者需独立部署
+- 消费者 Worker：`workers/queue-consumer.ts`，配置文件 `wrangler.consumer.toml`
+- 部署消费者：`npx wrangler deploy --config wrangler.consumer.toml`
+- 创建 queue 命令须加 `--message-retention-period-secs 86400`（默认 4 天超出免费限制）
+- 发送消息：`env.CONTACT_QUEUE.send({ id, name, email, createdAt })`
+- 联系表单 API：先保存 D1，再 enqueue（queue 失败不影响主流程）
 

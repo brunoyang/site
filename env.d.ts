@@ -6,4 +6,5 @@ interface CloudflareEnv {
   KV: KVNamespace;
   AI: Ai;
   TURNSTILE_SECRET_KEY: string;
+  CONTACT_QUEUE: Queue;
 }

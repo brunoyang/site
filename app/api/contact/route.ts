@@ -26,15 +26,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Verification failed' }, { status: 400 });
     }
 
+    const id = crypto.randomUUID();
+    const createdAt = new Date().toISOString();
+
     // Save message to D1
     const db = drizzle(env.DB);
-    await db.insert(contactMessages).values({
-      id: crypto.randomUUID(),
-      name,
-      email,
-      message,
-      createdAt: new Date().toISOString(),
-    });
+    await db.insert(contactMessages).values({ id, name, email, message, createdAt });
+
+    // Enqueue async notification
+    const cfEnv = env as CloudflareEnv;
+    if (cfEnv.CONTACT_QUEUE) {
+      await cfEnv.CONTACT_QUEUE.send({ id, name, email, createdAt });
+    }
 
     return NextResponse.json({ success: true });
   } catch (e) {

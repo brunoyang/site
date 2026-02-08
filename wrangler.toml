@@ -35,3 +35,8 @@ id = "e1044732b23d48e69cf4fc5b3c381b76"
 # Workers AI
 [ai]
 binding = "AI"
+
+# Queues（联系表单异步通知）
+[[queues.producers]]
+queue = "contact-notifications"
+binding = "CONTACT_QUEUE"

@@ -1,0 +1,8 @@
+name = "brunoyang-site-queue-consumer"
+main = "workers/queue-consumer.ts"
+compatibility_date = "2024-09-23"
+
+[[queues.consumers]]
+queue = "contact-notifications"
+max_batch_size = 10
+max_batch_timeout = 30

@@ -58,6 +58,14 @@ npx wrangler deploy    →  上传到 Cloudflare Workers
 - 查询封装：[lib/posts.ts](lib/posts.ts)
 - **避免 `select *`**：列表查询用 `summaryColumns`（排除大字段 `content`/`contentZh`），详情查询明确列出所有字段
 
+## Turnstile 人机验证
+
+- 实现：[lib/turnstile.ts](lib/turnstile.ts)，联系表单 [app/[locale]/contact/](app/[locale]/contact/)
+- 后端验证密钥：`TURNSTILE_SECRET_KEY`（Cloudflare Workers Secret）
+- 本地开发：`.env.local` 设置真实 secret，`.dev.vars` 用于 `pnpm preview` 模式
+- **sitekey 和 secret 必须配对**：真实 sitekey 对应真实 secret，测试 key 对应测试 secret
+- 迁移：`migrations/0004_create_contact_messages.sql`
+
 ## 认证
 
 - 实现：[lib/auth.ts](lib/auth.ts)，自实现 JWT（HMAC-SHA256）
