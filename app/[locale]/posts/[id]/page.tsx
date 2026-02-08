@@ -1,11 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getPostById, getAllPosts } from "@/lib/posts";
-
-export function generateStaticParams() {
-  return getAllPosts().map((post) => ({ id: post.id }));
-}
+import { getPostById } from "@/lib/posts";
 
 export default async function PostPage({
   params,
@@ -14,12 +10,12 @@ export default async function PostPage({
 }) {
   const { locale, id } = await params;
   const t = await getTranslations("PostsPage");
-  const post = getPostById(id);
+  const post = await getPostById(id);
 
   if (!post) notFound();
 
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen p-8 bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-3xl mx-auto">
         <Link
           href={`/${locale}/posts`}

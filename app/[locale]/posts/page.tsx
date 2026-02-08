@@ -9,10 +9,10 @@ export default async function PostsPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations("PostsPage");
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
 
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen p-8 bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
           {t("title")}

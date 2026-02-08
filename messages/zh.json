@@ -28,5 +28,22 @@
     "description": "关于 Cloudflare 和 Next.js 的最新文章",
     "readMore": "阅读更多",
     "backToList": "← 返回文章列表"
+  },
+  "AdminPage": {
+    "title": "管理 — 文章管理",
+    "newPost": "新建文章",
+    "editPost": "编辑文章",
+    "deletePost": "删除",
+    "save": "保存",
+    "cancel": "取消",
+    "confirmDelete": "确认删除此文章？",
+    "fieldTitle": "标题（英）",
+    "fieldTitleZh": "标题（中）",
+    "fieldExcerpt": "摘要（英）",
+    "fieldExcerptZh": "摘要（中）",
+    "fieldContent": "内容（英）",
+    "fieldContentZh": "内容（中）",
+    "fieldAuthor": "作者",
+    "fieldDate": "日期"
   }
 }

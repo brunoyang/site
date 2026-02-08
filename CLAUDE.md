@@ -51,6 +51,19 @@ npx wrangler deploy    →  上传到 Cloudflare Workers
 - [open-next.config.ts](open-next.config.ts) - 增量缓存使用 R2 (`r2IncrementalCache`)
 - [next.config.ts](next.config.ts) - Next.js 配置（含 next-intl 插件）
 
+## 数据库
+
+- ORM：Drizzle ORM（SQLite，通过 Cloudflare D1）
+- Schema：[db/schema.ts](db/schema.ts)
+- 查询封装：[lib/posts.ts](lib/posts.ts)
+- **避免 `select *`**：列表查询用 `summaryColumns`（排除大字段 `content`/`contentZh`），详情查询明确列出所有字段
+
+## 认证
+
+- 实现：[lib/auth.ts](lib/auth.ts)，自实现 JWT（HMAC-SHA256）
+- 密钥：环境变量 `SESSION_SECRET`（Cloudflare Workers Secret）
+- **注意**：密码哈希用 SHA-256（Workers 不支持 bcrypt/argon2），生产环境需额外防护（限制登录尝试次数）
+
 ## Node.js API 兼容性
 
 已启用 `nodejs_compat` 标志，支持 `Buffer`、`crypto`、`path` 等常用模块。

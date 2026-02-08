@@ -28,5 +28,22 @@
     "description": "Latest articles about Cloudflare and Next.js",
     "readMore": "Read more",
     "backToList": "← Back to posts"
+  },
+  "AdminPage": {
+    "title": "Admin — Manage Posts",
+    "newPost": "New Post",
+    "editPost": "Edit Post",
+    "deletePost": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirmDelete": "Delete this post?",
+    "fieldTitle": "Title (EN)",
+    "fieldTitleZh": "Title (ZH)",
+    "fieldExcerpt": "Excerpt (EN)",
+    "fieldExcerptZh": "Excerpt (ZH)",
+    "fieldContent": "Content (EN)",
+    "fieldContentZh": "Content (ZH)",
+    "fieldAuthor": "Author",
+    "fieldDate": "Date"
   }
 }

@@ -20,3 +20,9 @@ binding = "ASSETS"
 [[r2_buckets]]
 binding = "NEXT_INC_CACHE_R2_BUCKET"
 bucket_name = "store"
+
+# D1 数据库配置
+[[d1_databases]]
+binding = "DB"
+database_name = "brunoyang-site-db"
+database_id = "b9f6c4dc-77a4-4ee1-bbb3-5bf9b4d8810d"

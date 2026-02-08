@@ -4,7 +4,7 @@ export default function Home() {
   const t = useTranslations("HomePage");
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8 gap-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 gap-8 bg-linear-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <main className="flex flex-col gap-8 items-center max-w-4xl">
         <div className="text-center space-y-4">
           <h1 className="text-5xl font-bold text-gray-900 dark:text-white">
