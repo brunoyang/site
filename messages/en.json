@@ -1,0 +1,32 @@
+{
+  "HomePage": {
+    "title": "Welcome to Cloudflare + Next.js",
+    "description": "A Next.js application deployed on Cloudflare Workers",
+    "docsLink": "View Docs",
+    "footer": "Built with Next.js · Deployed on Cloudflare Workers",
+    "features": {
+      "free": {
+        "title": "Free Hosting",
+        "description": "Cloudflare offers 100,000 free requests per day and unlimited bandwidth"
+      },
+      "cdn": {
+        "title": "Global CDN",
+        "description": "Leverage Cloudflare's global network for ultra-fast load times"
+      },
+      "deploy": {
+        "title": "Auto Deploy",
+        "description": "Connect your Git repo for automatic builds and deployments on every push"
+      },
+      "edge": {
+        "title": "Edge Computing",
+        "description": "Use Cloudflare Workers for server-side rendering and API routes"
+      }
+    }
+  },
+  "PostsPage": {
+    "title": "Blog Posts",
+    "description": "Latest articles about Cloudflare and Next.js",
+    "readMore": "Read more",
+    "backToList": "← Back to posts"
+  }
+}

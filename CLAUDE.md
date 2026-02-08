@@ -1,0 +1,57 @@
+# cf-demo
+
+Next.js 项目，通过 `@opennextjs/cloudflare` 部署到 Cloudflare Workers。
+
+## 技术栈
+
+- **框架**：Next.js 16（App Router）
+- **样式**：Tailwind CSS 4
+- **运行时**：Cloudflare Workers（V8 Isolates）
+- **包管理**：pnpm
+- **语言**：TypeScript
+- **i18n**：next-intl（中文 zh + 英文 en，默认英文）
+
+## 重要概念
+
+- 静态文件通过 **Cloudflare Assets** 提供（`[assets]` binding）
+- ISR 增量缓存存储在 **R2**（`NEXT_INC_CACHE_R2_BUCKET` binding）
+- 标准 `next build` 只生成 `.next/`，**不能直接部署**到 Cloudflare
+- 必须先运行 `pnpm run pages:build`（调用 `opennextjs-cloudflare`）生成 `.open-next/`
+
+## 常用命令
+
+```bash
+pnpm run dev          # 本地开发（Node.js 模式）
+pnpm run preview      # 本地预览（Cloudflare Workers 模式）
+pnpm run deploy       # 构建 + 部署到 Cloudflare
+```
+
+## 部署流程
+
+```
+pnpm run pages:build   →  .open-next/ 生成
+npx wrangler deploy    →  上传到 Cloudflare Workers
+```
+
+**Cloudflare 控制台构建命令应设置为 `pnpm run pages:build`，而非 `pnpm run build`。**
+
+## i18n 结构
+
+- URL：`/en/...`（默认）和 `/zh/...`
+- 翻译文件：`messages/en.json`、`messages/zh.json`
+- 路由配置：`i18n/routing.ts`
+- 请求配置：`i18n/request.ts`
+- 中间件：`proxy.ts`（Next.js 16 用 proxy 替代 middleware，处理语言重定向）
+- 页面路由：`app/[locale]/page.tsx`
+
+## 关键配置文件
+
+- [wrangler.toml](wrangler.toml) - Worker 名称、入口、Assets、R2、自定义域名
+- [open-next.config.ts](open-next.config.ts) - 增量缓存使用 R2 (`r2IncrementalCache`)
+- [next.config.ts](next.config.ts) - Next.js 配置（含 next-intl 插件）
+
+## Node.js API 兼容性
+
+已启用 `nodejs_compat` 标志，支持 `Buffer`、`crypto`、`path` 等常用模块。
+不支持：`fs`（文件系统）、`child_process`、原始 `http`/`net` socket。
+不支持的场景改用：Cloudflare R2/KV 替代文件系统，`fetch()` 替代 `http`。

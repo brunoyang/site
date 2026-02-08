@@ -1,0 +1,32 @@
+{
+  "HomePage": {
+    "title": "欢迎使用 Cloudflare + Next.js",
+    "description": "这是一个部署在 Cloudflare Pages 上的 Next.js 应用示例",
+    "docsLink": "查看文档",
+    "footer": "由 Next.js 构建 · 部署在 Cloudflare Pages",
+    "features": {
+      "free": {
+        "title": "免费托管",
+        "description": "Cloudflare Pages 提供每天 100,000 次免费请求和无限带宽"
+      },
+      "cdn": {
+        "title": "全球 CDN",
+        "description": "利用 Cloudflare 的全球网络，为用户提供超快的加载速度"
+      },
+      "deploy": {
+        "title": "自动部署",
+        "description": "连接 Git 仓库，每次推送代码自动构建和部署"
+      },
+      "edge": {
+        "title": "边缘计算",
+        "description": "使用 Cloudflare Workers 实现服务端渲染和 API 路由"
+      }
+    }
+  },
+  "PostsPage": {
+    "title": "博客文章",
+    "description": "关于 Cloudflare 和 Next.js 的最新文章",
+    "readMore": "阅读更多",
+    "backToList": "← 返回文章列表"
+  }
+}
