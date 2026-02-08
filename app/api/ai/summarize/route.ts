@@ -3,7 +3,7 @@ import { getPostById } from '@/lib/posts';
 import { generateSummary } from '@/lib/ai';
 
 export async function POST(req: NextRequest) {
-  const { postId, locale } = await req.json();
+  const { postId, locale } = await req.json() as { postId: string; locale: string };
   if (!postId || !locale) {
     return NextResponse.json({ error: 'Missing postId or locale' }, { status: 400 });
   }
