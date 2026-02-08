@@ -41,7 +41,8 @@ npx wrangler deploy    →  上传到 Cloudflare Workers
 - 翻译文件：`messages/en.json`、`messages/zh.json`
 - 路由配置：`i18n/routing.ts`
 - 请求配置：`i18n/request.ts`
-- 中间件：`proxy.ts`（Next.js 16 用 proxy 替代 middleware，处理语言重定向）
+- 中间件：`middleware.ts`（纯 Web API 实现语言重定向）
+- **注意**：虽然 Next.js 16 推荐用 `proxy.ts`，但 `@opennextjs/cloudflare` 读取的是旧的 middleware manifest 格式，`proxy.ts` 会被误判为 Node.js middleware 导致构建失败。在 opennextjs-cloudflare 修复前，必须保留 `middleware.ts` + `export default function middleware`
 - 页面路由：`app/[locale]/page.tsx`
 
 ## 关键配置文件
