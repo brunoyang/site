@@ -35,6 +35,7 @@ yarn-error.log*
 next-env.d.ts
 
 # Cloudflare
+.dev.vars
 .wrangler/
 .worker-next/
 wrangler.log

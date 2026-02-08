@@ -33,6 +33,18 @@
     "aiSummaryLoading": "生成中…",
     "aiSummaryTitle": "AI 摘要"
   },
+  "ContactPage": {
+    "title": "联系我",
+    "description": "发送消息给我。由 Cloudflare Turnstile 保护。",
+    "fieldName": "姓名",
+    "fieldEmail": "邮箱",
+    "fieldMessage": "消息",
+    "submit": "发送",
+    "submitting": "发送中…",
+    "success": "消息已发送，谢谢！",
+    "error": "发送失败，请重试。",
+    "protected": "由 Cloudflare Turnstile 保护"
+  },
   "AdminPage": {
     "title": "管理 — 文章管理",
     "newPost": "新建文章",

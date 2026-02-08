@@ -33,6 +33,18 @@
     "aiSummaryLoading": "Generating…",
     "aiSummaryTitle": "AI Summary"
   },
+  "ContactPage": {
+    "title": "Contact",
+    "description": "Send me a message. Protected by Cloudflare Turnstile.",
+    "fieldName": "Name",
+    "fieldEmail": "Email",
+    "fieldMessage": "Message",
+    "submit": "Send Message",
+    "submitting": "Sending…",
+    "success": "Message sent! Thank you.",
+    "error": "Something went wrong. Please try again.",
+    "protected": "Protected by Cloudflare Turnstile"
+  },
   "AdminPage": {
     "title": "Admin — Manage Posts",
     "newPost": "New Post",

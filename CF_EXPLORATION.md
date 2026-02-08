@@ -35,7 +35,7 @@
   - 免费额度：每日 neurons 限额
 
 ### Phase 4：安全 & 表单
-- [ ] **Turnstile — 免费验证码替代**
+- [x] **Turnstile — 免费验证码替代**
   - 目标：加入评论/联系表单，集成 Turnstile 人机验证
   - 完全免费，无额度限制
 
@@ -66,7 +66,7 @@
 | D1 | ✅ 已集成 | 2026-02-08 | Edge SQLite，文章 CRUD |
 | KV | ✅ 已集成 | 2026-02-08 | 文章阅读量计数器 |
 | Workers AI | ✅ 已集成 | 2026-02-08 | 文章 AI 摘要（按需生成 + KV 缓存） |
-| Turnstile | 🔲 待开始 | — | |
+| Turnstile | ✅ 已集成 | 2026-02-08 | 联系表单人机验证 + D1 存消息 |
 | Queues | 🔲 待开始 | — | |
 | Durable Objects | ⏸️ 暂缓 | — | 需付费 |
 | Analytics Engine | 🔲 待开始 | — | |
@@ -108,6 +108,12 @@
 
 ### Turnstile
 
+- sitekey：测试用 `1x00000000000000000000AA`，生产用真实 sitekey（设置 `NEXT_PUBLIC_TURNSTILE_SITE_KEY` 环境变量）
+- secret：通过 `wrangler secret put TURNSTILE_SECRET_KEY` 设置，测试用 `1x0000000000000000000000000000000AA`
+- 验证端点：`POST https://challenges.cloudflare.com/turnstile/v0/siteverify`
+- 联系表单页：`/[locale]/contact`，消息存储到 D1 `contact_messages` 表
+- 前端动态加载 Turnstile script，`data-callback` 回调获取 token
+- 迁移文件：`migrations/0004_create_contact_messages.sql`
 
 ### Queues
 

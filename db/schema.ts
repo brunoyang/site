@@ -18,3 +18,11 @@ export const adminUsers = sqliteTable('admin_users', {
   passwordHash: text('password_hash').notNull(),
   createdAt: text('created_at').notNull(),
 });
+
+export const contactMessages = sqliteTable('contact_messages', {
+  id: text('id').primaryKey(),
+  name: text('name').notNull(),
+  email: text('email').notNull(),
+  message: text('message').notNull(),
+  createdAt: text('created_at').notNull(),
+});
