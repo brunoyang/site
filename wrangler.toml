@@ -45,3 +45,11 @@ binding = "CONTACT_QUEUE"
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"
 dataset = "site_events"
+
+# Workers 日志（可观测性）
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+invocation_logs = true
